@@ -15,7 +15,7 @@ const ENV = app.get('env');
 app.set('port', process.env.PORT || 8012); // eslint-disable-line no-process-env
 
 // Configure templating
-app.set('views', path.join(__dirname, 'server/templates'));
+app.set('views', path.join(__dirname, './templates'));
 app.set('view engine', 'jade');
 
 // setting proxy
@@ -29,6 +29,10 @@ app.use(compression());
 // setting paths
 app.use(express.static(path.join(__dirname, '../public'), fileHeaders));
 app.use(express.static(path.join(__dirname, '../static'), fileHeaders));
+
+app.get('/', (req, res) => {
+  res.render('layout');
+});
 
 // starting server
 server.listen(app.get('port'), () => {
