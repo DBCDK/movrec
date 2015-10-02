@@ -1,0 +1,19 @@
+{
+  "name": "movrec",
+  "version": "1.0.0",
+  "description": "Movie Recommender",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DBCDK/movrec.git"
+  },
+  "author": "dbcdk",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DBCDK/movrec/issues"
+  },
+  "homepage": "https://github.com/DBCDK/movrec#readme"
+}
