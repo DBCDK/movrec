@@ -27,8 +27,8 @@ const fileHeaders = {index: false, dotfiles: 'ignore', maxAge: '1d'};
 app.use(compression());
 
 // setting paths
-app.use(express.static(path.join(__dirname, '../public'), fileHeaders));
-app.use(express.static(path.join(__dirname, '../static'), fileHeaders));
+app.use(express.static(path.join(__dirname, '../../public'), fileHeaders));
+app.use(express.static(path.join(__dirname, '../../static'), fileHeaders));
 
 app.get('/', (req, res) => {
   res.render('layout');
