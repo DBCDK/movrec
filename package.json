@@ -4,6 +4,7 @@
   "description": "Movie Recommender",
   "main": "src/main.js",
   "scripts": {
+    "start:watch": "echo \"Error! Watcher is not implemented yet!\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "supervisor --harmony -w src/server,node_modules src/main.js",
     "dev": "parallelshell \"npm run start:watch -s\" \"npm run serve -s\""
