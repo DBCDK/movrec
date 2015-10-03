@@ -1,8 +1,20 @@
+.movieitem {
+  padding-bottom: 20px;
+  background-image: url(/images/movie_frame.png);
+  background-repeat: no-repeat;
+  background-size: 275px 200px;
+  background-position: center;
+  text-align: center;
+  height: 200px;
+}
 .movie-item-container--container {
   height: 63%;
   overflow: scroll;
 }
 
 .movieitem--image-container--image {
+  margin-top: 15px;
   width: 190px;
+  max-height: 160px;
+  overflow: hidden;
 }

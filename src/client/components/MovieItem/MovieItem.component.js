@@ -19,7 +19,7 @@ class MovieItem extends React.Component {
       var hammertime = new Hammer(React.findDOMNode(ref), {});
       hammertime.on('pan', function(ev) {
         let elem = ev.target;
-        while(elem.className !== 'movieitem') {
+        while (elem.className !== 'movieitem') {
           elem = elem.parentElement;
         }
 
@@ -30,17 +30,16 @@ class MovieItem extends React.Component {
           rightHandler(elem, pid);
         }
       });
-      hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+      hammertime.get('pan').set({direction: Hammer.DIRECTION_HORIZONTAL});
     }
   }
 
   render() {
     const imageUrl = this.props.imageUrl || 'http://dummyimage.com/100x100/000/fff.png';
     const title = this.props.title || 'Title';
-    const creator = this.props.creator || 'Creator';
 
     return (
-      <div className="movieitem" ref='movieItem'>
+      <div className="movieitem" ref='movieItem' >
         <div className="movieitem--image-container" >
           <img className="movieitem--image-container--image" src={imageUrl} />
         </div>
