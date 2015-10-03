@@ -13,7 +13,7 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
   }
 
   componentDidMount() {
-    this.refs.movieItemContainer.addEventListener("scroll", this.onPageScroll);
+    // this.refs.movieItemContainer.addEventListener("scroll", this.onPageScroll);
   }
 
   getMovieItems(movies) {
