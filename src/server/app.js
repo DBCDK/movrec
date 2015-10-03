@@ -7,13 +7,18 @@ import express from 'express';
 import compression from 'compression';
 import socketio from 'socket.io';
 import ServiceProvider from 'dbc-node-serviceprovider';
+import Logger from 'dbc-node-logger';
+
+// Serviceclient and Transforms
 import * as MovieRecommenderClient from './clients/movierecommendations.client';
 import * as MovieRecommenderTransform from './transforms/MovieRecommendations.transform';
+import * as RandomMovieRecommenderTransform from './transforms/RandomMovieRecommendations.transform';
 
 const app = express();
 const server = http.Server(app);
 const socket = socketio.listen(server);
 const ENV = app.get('env');
+const logger = new Logger({app_name: 'movrec'});
 const RecommenderConfig = {
   recommend: {
     endpoint: 'http://xp-p01.dbc.dk:8014/' || process.env.RECOMMENDER_URL
@@ -22,16 +27,11 @@ const RecommenderConfig = {
 
 app.set('port', process.env.PORT || 8012); // eslint-disable-line no-process-env
 
-const provider = ServiceProvider({services: RecommenderConfig});
+const provider = ServiceProvider({services: RecommenderConfig}, logger);
 provider.registerServiceClient(MovieRecommenderClient);
 provider.registerTransform(MovieRecommenderTransform);
+provider.registerTransform(RandomMovieRecommenderTransform);
 provider.setupSockets(socket);
-
-// kept for reference
-let promise = provider.trigger('getMovieRecommendations');
-Promise.all(promise).then((result) => {
-  console.log('result', JSON.stringify(result));
-});
 
 // Configure templating
 app.set('views', path.join(__dirname, './templates'));
@@ -56,5 +56,5 @@ app.get('/', (req, res) => {
 
 // starting server
 server.listen(app.get('port'), () => {
-  console.log('debug', 'Server listening on port ' + app.get('port'));
+  logger.log('debug', 'Server listening on port ' + app.get('port'));
 });
