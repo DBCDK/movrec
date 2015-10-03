@@ -4,6 +4,7 @@
   "description": "Movie Recommender",
   "main": "src/main.js",
   "scripts": {
+    "build": "webpack --progress --colors -p",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "supervisor --harmony -w src/server,node_modules src/main.js",
     "start:watch": "webpack --progress --colors --watch -d",

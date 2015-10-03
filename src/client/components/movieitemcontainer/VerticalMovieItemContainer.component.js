@@ -28,7 +28,7 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
       movieItems.push((
         <div className='row' key={key}>
           <div className='' >
-            <MovieItem title={val.title} />
+            <MovieItem title={val.title} imageUrl={val.imageUrl} />
           </div>
         </div>
       ));
