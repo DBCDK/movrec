@@ -1,21 +1,27 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
+import {isEmpty} from 'lodash';
 
 class MovieItemContainerComponent extends React.Component {
 
   constructor(){
     super();
+    this.state = {
+      movies: []
+    };
   }
 
-  render() {
-    return <div>movies go here!</div>;
+  componentWillMount() {
+    this.state.movies = isEmpty(this.state.movies) ? this.props.movies : this.state.movies;
   }
 }
 
 MovieItemContainerComponent.displayName = 'MovieItemContainerComponent';
 MovieItemContainerComponent.propTypes = {
-  isAutoScrolling: PropTypes.bool
+  isAutoScrolling: PropTypes.bool,
+  movies: PropTypes.array,
+  movieItemCssClasses: PropTypes.string
 };
 
 export default MovieItemContainerComponent;

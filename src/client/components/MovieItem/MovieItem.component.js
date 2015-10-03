@@ -13,7 +13,7 @@ class MovieItem extends React.Component {
     const creator = this.props.creator || 'Creator';
 
     return (
-      <div className="moiveitem" >
+      <div className="movieitem" >
         <div className="movieitem--image-container" >
           <img className="movieitem--image-container--image" src={imageUrl} />
         </div>

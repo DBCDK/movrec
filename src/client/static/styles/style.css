@@ -1,6 +1,43 @@
+body {
+    max-height: 99%;
+}
+
 .pull-to-bottom {
     position: absolute;
     bottom: 0;
-    margin: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    height: 28%;
+    max-height: 28%;
+    width: 100%;
+    overflow: hidden;
+}
 
+.movie-item-container--container {
+    height: 50%;
+    overflow: scroll;
+}
+
+.vertical-movie-item-container {
+    max-width: 90%;
+}
+
+.vertical-movie-item-container > div > div > .movieitem {
+    margin-left: 10%;
+}
+
+.horizontal-movie-item-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.horizontal-movie-item-container > li {
+    display: inline-block;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+.horizontal-movie-item-container > li > .movieitem {
+    height: 80%;
 }

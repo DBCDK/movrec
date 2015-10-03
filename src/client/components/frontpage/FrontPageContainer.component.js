@@ -3,6 +3,8 @@
 import React from 'react';
 
 import MovieItemContainerComponent from '../movieitemcontainer/MovieItemContainer.component.js';
+import HorizontalMovieItemContainerComponent from '../movieitemcontainer/HorizontalMovieItemContainer.component.js';
+import VerticalMovieItemContainerComponent from '../movieitemcontainer/VerticalMovieItemContainer.component.js';
 
 class FrontPageContainer extends React.Component {
 
@@ -11,23 +13,44 @@ class FrontPageContainer extends React.Component {
   }
 
   render() {
+    const movies = [
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'},
+      {title: 'this is a movie!'}
+    ];
+
     return (
       <div className='container'>
         <div className='row'>
           <div className='show-for-medium-up'>
             <div className='large-4 medium-4 columns'>
               <h2>Likes!</h2>
-              <MovieItemContainerComponent />
+              <div className='movie-item-container--container'>
+                <VerticalMovieItemContainerComponent movies={movies} width={1} />
+              </div>
             </div>
 
             <div className='large-4 medium-4 columns'>
               <h2>MovieRec!</h2>
-              <MovieItemContainerComponent isAutoScrolling={true} />
+              <div className='movie-item-container--container'>
+                <VerticalMovieItemContainerComponent movies={movies} isAutoScrolling={true} width={1} />
+              </div>
             </div>
 
             <div className='large-4 medium-4 columns'>
               <h2>Dislikes!</h2>
-              <MovieItemContainerComponent />
+              <div className='movie-item-container--container'>
+                <VerticalMovieItemContainerComponent movies={movies} width={1} />
+              </div>
             </div>
           </div>
 
@@ -42,7 +65,7 @@ class FrontPageContainer extends React.Component {
         <div className='show-for-medium-up pull-to-bottom'>
           <div className='row'>
             <h2 className='text-center'>Vi anbefaler</h2>
-            <MovieItemContainerComponent />
+            <HorizontalMovieItemContainerComponent movies={movies} movieItemCssClasses={'large-2 medium-2'} />
           </div>
         </div>
       </div>
