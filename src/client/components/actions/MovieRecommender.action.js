@@ -10,7 +10,9 @@ const RecommenderActions = Reflux.createActions([
   'movieRecommendationsRequest',
   'movieRecommendationsResponse',
   'randomMovieRecommendationsRequest',
-  'randomMovieRecommendationsResponse'
+  'randomMovieRecommendationsResponse',
+  'likeMovie',
+  'dislikeMovie'
 ]);
 
 RecommenderActions.movieRecommendationsRequest.listen(getMovieRecommendations.request);

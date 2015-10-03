@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {indexOf} from 'lodash';
 
 // Stores
 import MovieRecommenderStore from '../stores/MovieRecommender.store';
@@ -9,6 +10,8 @@ import MovieRecommenderStore from '../stores/MovieRecommender.store';
 import MovieItemContainerComponent from '../movieitemcontainer/MovieItemContainer.component.js';
 import HorizontalMovieItemContainerComponent from '../movieitemcontainer/HorizontalMovieItemContainer.component.js';
 import VerticalMovieItemContainerComponent from '../movieitemcontainer/VerticalMovieItemContainer.component.js';
+
+import MovieRecommenderActions from '../actions/MovieRecommender.action.js';
 
 class FrontPageContainer extends React.Component {
 
@@ -46,7 +49,12 @@ class FrontPageContainer extends React.Component {
     let likes = this.state.likes;
     let dislikes = this.state.dislikes;
     return (pid) => {
+      if (indexOf(dislikes, pid) > -1) {
+        dislikes.splice(indexOf(dislikes, pid), 1);
+      }
+
       likes.push(pid);
+      MovieRecommenderActions.likeMovie(likes);
     };
   }
 
@@ -54,7 +62,12 @@ class FrontPageContainer extends React.Component {
     let likes = this.state.likes;
     let dislikes = this.state.dislikes;
     return (pid) => {
+      if (indexOf(likes, pid) > -1) {
+        likes.splice(indexOf(likes, pid), 1);
+      }
+
       dislikes.push(pid);
+      MovieRecommenderActions.dislikeMovie(dislikes);
     };
   }
 
