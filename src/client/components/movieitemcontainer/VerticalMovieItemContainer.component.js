@@ -1,12 +1,13 @@
 'use strict';
 
 import React from 'react';
+import {each} from 'lodash';
 
 import MovieItemContainerComponent from './MovieItemContainer.component.js';
 import MovieItem from '../MovieItem/MovieItem.component.js';
 
 class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
-  constructor(){
+  constructor() {
     super();
 
     this.self = this;
@@ -17,15 +18,19 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
   }
 
   getMovieItems(movies) {
-    return movies.map((val, idx) => {
-      return (
-        <div className='row'>
-          <div className=''>
-            <MovieItem title={val.title} key={idx} />
+    let movieItems = [];
+    each(movies, (val, key) => {
+      console.log(key);
+      movieItems.push((
+        <div className='row' >
+          <div className='' >
+            <MovieItem title={val.title} key={key} />
           </div>
         </div>
-      );
+      ));
     });
+
+    return movieItems;
   }
 
   onPageScroll() {
@@ -34,8 +39,8 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
 
   render() {
     return (
-      <div className='vertical-movie-item-container' ref='movieItemContainer'>
-        {this.getMovieItems(this.state.movies)}
+      <div className='vertical-movie-item-container' ref='movieItemContainer' >
+        {this.getMovieItems(this.props.movies)}
       </div>
     );
   }

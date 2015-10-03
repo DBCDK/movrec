@@ -20,7 +20,7 @@ class MovieItemContainerComponent extends React.Component {
 MovieItemContainerComponent.displayName = 'MovieItemContainerComponent';
 MovieItemContainerComponent.propTypes = {
   isAutoScrolling: PropTypes.bool,
-  movies: PropTypes.array,
+  movies: PropTypes.object,
   movieItemCssClasses: PropTypes.string
 };
 

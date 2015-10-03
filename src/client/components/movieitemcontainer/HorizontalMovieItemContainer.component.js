@@ -1,5 +1,7 @@
 'use strict';
 
+import {each} from 'lodash';
+
 import MovieItemContainerComponent from './MovieItemContainer.component.js';
 import MovieItem from '../MovieItem/MovieItem.component.js';
 
@@ -9,7 +11,7 @@ class HorizontalMovieItemContainerComponent extends MovieItemContainerComponent 
   }
 
   getMovieItems(movies) {
-    return movies.map((val, idx) => {
+    return each(movies, (val, idx) => {
       return (
         <li key={idx}>
           <MovieItem title={val.title} />

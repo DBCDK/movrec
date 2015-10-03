@@ -7,8 +7,8 @@ import MovieRecommenderActions from '../actions/MovieRecommender.action';
 
 const MovieRecommenderStore = Reflux.createStore({
   store: {
-    random: [],
-    recommendations: []
+    random: {},
+    recommendations: {}
   },
 
   init() {
@@ -21,8 +21,16 @@ const MovieRecommenderStore = Reflux.createStore({
   },
 
   onRandomMovieRecommendationsResponse(response) {
-    console.log('onRandomMovieRecommendationsResponse');
-    this.store.random =  response.result;
+    const random = this.store.random;
+    response.result.forEach((movie) => {
+      const pid = movie[0];
+      const data = movie[1];
+      data.pid = pid;
+      random[pid] = data;
+    });
+
+
+    this.store.random =  random;
     this.trigger(this.store);
   }
 });

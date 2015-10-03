@@ -15,7 +15,7 @@ class FrontPageContainer extends React.Component {
   constructor() {
     super();
 
-    this.state = {random: [], recommendations: []};
+    this.state = {random: {}, recommendations: {}};
   }
 
   componentDidMount() {
@@ -43,20 +43,9 @@ class FrontPageContainer extends React.Component {
   }
 
   render() {
-    const movies = [
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'},
-      {title: 'this is a movie!'}
-    ];
+    const randomRecommendations = this.state.random;
+    console.log(randomRecommendations);
+    const movies = {};
 
     return (
       <div className='container' >
@@ -72,7 +61,7 @@ class FrontPageContainer extends React.Component {
             <div className='large-4 medium-4 columns' >
               <h2>MovieRec!</h2>
               <div className='movie-item-container--container' >
-                <VerticalMovieItemContainerComponent movies={movies} isAutoScrolling={true} width={1} />
+                <VerticalMovieItemContainerComponent movies={randomRecommendations} isAutoScrolling={true} width={1} />
               </div>
             </div>
 
