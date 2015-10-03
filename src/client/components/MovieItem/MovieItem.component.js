@@ -40,7 +40,7 @@ class MovieItem extends React.Component {
   }
 
   render() {
-    const imageUrl = this.props.imageUrl || 'http://dummyimage.com/100x100/000/fff.png';
+    const imageUrl = this.props.imageUrl || 'http://dummyimage.com/190x150/000/fff.png';
     const title = this.props.title || 'Title';
 
     return (
