@@ -105,7 +105,7 @@ class FrontPageContainer extends React.Component {
         <div className='row' >
           <div className='show-for-medium-up' >
             <div className='large-4 medium-4 columns' >
-              <h3 className='text-center'>Fin film</h3>
+              <h4 className='text-center'>Fin film</h4>
               <div className='movie-item-container--container' >
                 <VerticalMovieItemContainerComponent
                   movies={likes}
@@ -116,7 +116,7 @@ class FrontPageContainer extends React.Component {
             </div>
 
             <div className='large-4 medium-4 columns' >
-              <h3 className='text-center'>Forslag</h3>
+              <h4 className='text-center'>Forslag</h4>
               <div className='movie-item-container--container'>
                 <VerticalMovieItemContainerComponent
                   movies={randomRecommendations}
@@ -128,7 +128,7 @@ class FrontPageContainer extends React.Component {
             </div>
 
             <div className='large-4 medium-4 columns' >
-              <h3 className='text-center'>Ikke så fin film</h3>
+              <h4 className='text-center'>Ikke så fin film</h4>
               <div className='movie-item-container--container' >
                 <VerticalMovieItemContainerComponent
                   movies={dislikes}
@@ -141,7 +141,7 @@ class FrontPageContainer extends React.Component {
 
           <div className='show-for-small-only' >
             <div>
-              <h1>Din skærm er for lille!</h1>
+              <h4>Din skærm er for lille!</h4>
               <h4>For den optimale oplevelse skal du bruge en større skærm!</h4>
               <img src="https://en.gravatar.com/userimage/23206348/9d3694eac224757ca3636779f4f3b79e.jpg?size=400" />
             </div>
