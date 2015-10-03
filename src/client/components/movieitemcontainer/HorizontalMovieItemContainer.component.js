@@ -11,13 +11,19 @@ class HorizontalMovieItemContainerComponent extends MovieItemContainerComponent 
   }
 
   getMovieItems(movies) {
-    return each(movies, (val, idx) => {
-      return (
-        <li key={idx}>
-          <MovieItem title={val.title} />
-        </li>
-      );
+    let movieItems = [];
+
+    each(movies, (val, key) => {
+      movieItems.push((
+        <div className='row' key={key} >
+          <div className='' >
+            <MovieItem title={val.title} />
+          </div>
+        </div>
+      ));
     });
+
+    return movieItems;
   }
 
   render() {

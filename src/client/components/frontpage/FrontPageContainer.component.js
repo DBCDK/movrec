@@ -44,7 +44,6 @@ class FrontPageContainer extends React.Component {
 
   render() {
     const randomRecommendations = this.state.random;
-    console.log(randomRecommendations);
     const movies = {};
 
     return (

@@ -17,14 +17,18 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     // this.refs.movieItemContainer.addEventListener("scroll", this.onPageScroll);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (JSON.stringify(this.props) !== JSON.stringify(nextProps));
+  }
+
   getMovieItems(movies) {
     let movieItems = [];
+
     each(movies, (val, key) => {
-      console.log(key);
       movieItems.push((
-        <div className='row' >
+        <div className='row' key={key}>
           <div className='' >
-            <MovieItem title={val.title} key={key} />
+            <MovieItem title={val.title} />
           </div>
         </div>
       ));
