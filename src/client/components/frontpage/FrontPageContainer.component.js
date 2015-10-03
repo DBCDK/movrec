@@ -18,7 +18,7 @@ class FrontPageContainer extends React.Component {
   constructor() {
     super();
 
-    this.state = {random: {}, recommendations: {}, likes: [], dislikes: []};
+    this.state = {random: {}, recommendations: {}, likes: {}, dislikes: {}};
   }
 
   componentDidMount() {
@@ -48,12 +48,23 @@ class FrontPageContainer extends React.Component {
   likeFunction() {
     let likes = this.state.likes;
     let dislikes = this.state.dislikes;
+    let random = this.state.random;
+    let recommendations = this.state.recommendations;
+
     return (pid) => {
-      if (indexOf(dislikes, pid) > -1) {
-        dislikes.splice(indexOf(dislikes, pid), 1);
+      if (dislikes[pid]) {
+        likes[pid] = dislikes[pid];
+        delete dislikes[pid];
+      }
+      if (random[pid]) {
+        likes[pid] = random[pid];
+        delete random[pid];
+      }
+      if (recommendations[pid]) {
+        likes[pid] = recommendations[pid];
+        delete recommendations[pid];
       }
 
-      likes.push(pid);
       MovieRecommenderActions.likeMovie(likes);
     };
   }
@@ -61,18 +72,31 @@ class FrontPageContainer extends React.Component {
   dislikeFunction() {
     let likes = this.state.likes;
     let dislikes = this.state.dislikes;
+    let random = this.state.random;
+    let recommendations = this.state.recommendations;
+
     return (pid) => {
-      if (indexOf(likes, pid) > -1) {
-        likes.splice(indexOf(likes, pid), 1);
+      if (likes[pid]) {
+        dislikes[pid] = likes[pid];
+        delete likes[pid];
+      }
+      if (random[pid]) {
+        dislikes[pid] = random[pid];
+        delete random[pid];
+      }
+      if (recommendations[pid]) {
+        dislikes[pid] = recommendations[pid];
+        delete recommendations[pid];
       }
 
-      dislikes.push(pid);
       MovieRecommenderActions.dislikeMovie(dislikes);
     };
   }
 
   render() {
     const randomRecommendations = this.state.random;
+    const likes = this.state.likes;
+    const dislikes = this.state.dislikes;
     const movies = {};
 
     return (
@@ -83,10 +107,10 @@ class FrontPageContainer extends React.Component {
               <h2>Likes!</h2>
               <div className='movie-item-container--container' >
                 <VerticalMovieItemContainerComponent
-                  movies={movies}
+                  movies={likes}
                   position={1}
-                  addToLikes={this.likeFunction}
-                  addToDislikes={this.dislikeFunction} />
+                  addToLikes={this.likeFunction()}
+                  addToDislikes={this.dislikeFunction()} />
               </div>
             </div>
 
@@ -97,8 +121,8 @@ class FrontPageContainer extends React.Component {
                   movies={randomRecommendations}
                   isAutoScrolling={true}
                   position={2}
-                  addToLikes={this.likeFunction}
-                  addToDislikes={this.dislikeFunction} />
+                  addToLikes={this.likeFunction()}
+                  addToDislikes={this.dislikeFunction()} />
               </div>
             </div>
 
@@ -106,10 +130,10 @@ class FrontPageContainer extends React.Component {
               <h2>Dislikes!</h2>
               <div className='movie-item-container--container' >
                 <VerticalMovieItemContainerComponent
-                  movies={movies}
+                  movies={dislikes}
                   position={3}
-                  addToLikes={this.likeFunction}
-                  addToDislikes={this.dislikeFunction} />
+                  addToLikes={this.likeFunction()}
+                  addToDislikes={this.dislikeFunction()} />
               </div>
             </div>
           </div>
