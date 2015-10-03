@@ -22,7 +22,6 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     let moveAnimate = this.moveAnimate;
     return (elem, pid) => {
       let leftcol = document.getElementsByClassName('vertical-movie-item-container container-number-1')[0];
-      // leftcol.insertBefore(elem, leftcol.firstChild);
       moveAnimate(elem, leftcol);
       like(pid);
     }
@@ -33,7 +32,6 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     let moveAnimate = this.moveAnimate;
     return (elem, pid) => {
       let rightcol = document.getElementsByClassName('vertical-movie-item-container container-number-3')[0];
-      // rightcol.insertBefore(elem, rightcol.firstChild);
       moveAnimate(elem, rightcol);
       dislike(pid);
     }
