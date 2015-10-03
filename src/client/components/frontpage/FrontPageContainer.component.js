@@ -41,7 +41,8 @@ class FrontPageContainer extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const random = (JSON.stringify(this.state.random) !== JSON.stringify(nextState.random));
-    const recommendations = (JSON.stringify(this.state.recommendations) !== JSON.stringify(nextState.recommendations));
+    let recommendations = (JSON.stringify(this.state.recommendations) !== JSON.stringify(nextState.recommendations));
+    recommendations = true;
     return (random || recommendations);
   }
 
@@ -95,9 +96,9 @@ class FrontPageContainer extends React.Component {
 
   render() {
     const randomRecommendations = this.state.random;
+    const recommendations = this.state.recommendations;
     const likes = this.state.likes;
     const dislikes = this.state.dislikes;
-    const movies = {};
 
     return (
       <div className='container' >
@@ -151,7 +152,7 @@ class FrontPageContainer extends React.Component {
           <div className='row'>
             <h2 className='text-center'>Anbefalinger</h2>
             <HorizontalMovieItemContainerComponent
-              movies={movies}
+              movies={recommendations}
               position= {4} />
           </div>
         </div>

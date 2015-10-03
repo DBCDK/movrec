@@ -23,7 +23,6 @@ function getMovieRecommendations(params) {
         if (err){
           console.error(`Some error occured while communicating with the recommender service at: ${url}`, err);
         } else {
-          console.log(url);
           resolve(httpResponse.body);
         }
       }

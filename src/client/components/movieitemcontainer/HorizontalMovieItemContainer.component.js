@@ -15,9 +15,9 @@ class HorizontalMovieItemContainerComponent extends MovieItemContainerComponent 
 
     each(movies, (val, key) => {
       movieItems.push((
-        <div className='row' key={key} >
+        <div className='row' key={key}>
           <div className='' >
-            <MovieItem title={val.title} />
+            <MovieItem title={val.title} imageUrl={val.imageUrl} pid={val.pid} />
           </div>
         </div>
       ));
@@ -29,7 +29,7 @@ class HorizontalMovieItemContainerComponent extends MovieItemContainerComponent 
   render() {
     return (
       <ul className='horizontal-movie-item-container' ref='movieItemContainer'>
-        {this.getMovieItems(this.state.movies)}
+        {this.getMovieItems(this.props.movies)}
       </ul>
     );
   }

@@ -18,7 +18,7 @@ const MovieRecommenderStore = Reflux.createStore({
   },
 
   onMovieRecommendationsResponse(response) {
-    this.parseResponse(response, 'recommendations');
+    this.parseResponse(response, 'recommendations', true);
   },
 
   onLikeMovie(likes, dislikes) {
@@ -30,7 +30,7 @@ const MovieRecommenderStore = Reflux.createStore({
   },
 
   onRandomMovieRecommendationsResponse(response) {
-    this.parseResponse(response, 'random');
+    this.parseResponse(response, 'random', false);
   },
 
   getRecommendations(likes, dislikes) {
@@ -48,8 +48,8 @@ const MovieRecommenderStore = Reflux.createStore({
     MovieRecommenderActions.movieRecommendationsRequest({like:_likes, dislike: _dislikes});
   },
 
-  parseResponse(response, target) {
-    const result = this.store[target];
+  parseResponse(response, target, removeExisting) {
+    const result = removeExisting ? {} : this.store[target];
     response.result.forEach((movie) => {
       const pid = movie[0];
       const data = movie[1];
