@@ -65,7 +65,7 @@ class FrontPageContainer extends React.Component {
         delete recommendations[pid];
       }
 
-      MovieRecommenderActions.likeMovie(likes);
+      MovieRecommenderActions.likeMovie(likes, dislikes);
     };
   }
 
@@ -89,7 +89,7 @@ class FrontPageContainer extends React.Component {
         delete recommendations[pid];
       }
 
-      MovieRecommenderActions.dislikeMovie(dislikes);
+      MovieRecommenderActions.dislikeMovie(dislikes, likes);
     };
   }
 

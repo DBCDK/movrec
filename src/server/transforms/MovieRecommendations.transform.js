@@ -6,11 +6,10 @@ const MovieRecommendationsTransform = {
   },
 
   requestTransform(event, params) {
-    return this.callServiceClient('recommend', 'getRandomMovieRecommendations', params);
+    return this.callServiceClient('recommend', 'getMovieRecommendations', params);
   },
 
   responseTransform(data) {
-    console.log(arguments);
     return data;
   }
 };

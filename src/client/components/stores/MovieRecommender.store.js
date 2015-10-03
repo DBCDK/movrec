@@ -1,6 +1,7 @@
 'use strict';
 
 import Reflux from 'reflux';
+import {each} from 'lodash';
 
 // Actions
 import MovieRecommenderActions from '../actions/MovieRecommender.action';
@@ -17,20 +18,47 @@ const MovieRecommenderStore = Reflux.createStore({
   },
 
   onMovieRecommendationsResponse(response) {
-    console.log('onMovieRecommendationsResponse');
+    this.parseResponse(response, 'recommendations');
+  },
+
+  onLikeMovie(likes, dislikes) {
+    this.getRecommendations(likes, dislikes);
+  },
+
+  onDislikeMovie(dislikes, likes) {
+    this.getRecommendations(likes, dislikes);
   },
 
   onRandomMovieRecommendationsResponse(response) {
-    const random = this.store.random;
+    this.parseResponse(response, 'random');
+  },
+
+  getRecommendations(likes, dislikes) {
+    let _likes = [];
+    let _dislikes = [];
+
+    each(likes, (like) => {
+      _likes.push(like.pid);
+    });
+
+    each(dislikes, (dislike) => {
+      _dislikes.push(dislike.pid);
+    });
+
+    MovieRecommenderActions.movieRecommendationsRequest({like:_likes, dislike: _dislikes});
+  },
+
+  parseResponse(response, target) {
+    const result = this.store[target];
     response.result.forEach((movie) => {
       const pid = movie[0];
       const data = movie[1];
       data.pid = pid;
-      random[pid] = data;
+      result[pid] = data;
     });
 
 
-    this.store.random =  random;
+    this.store[target] =  result;
     this.trigger(this.store);
   }
 });

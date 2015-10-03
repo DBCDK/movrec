@@ -15,11 +15,15 @@ function getMovieRecommendations(params) {
     request.post(
       {
         url: url,
-        json: {}
+        json: {
+          like: params.like,
+          dislike: params.dislike
+        }
       }, (err, httpResponse) => {
         if (err){
           console.error(`Some error occured while communicating with the recommender service at: ${url}`, err);
         } else {
+          console.log(url);
           resolve(httpResponse.body);
         }
       }
