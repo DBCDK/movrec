@@ -142,6 +142,7 @@ class FrontPageContainer extends React.Component {
             <div>
               <h1>Din skærm er for lille!</h1>
               <h4>For den optimale oplevelse skal du bruge en større skærm!</h4>
+              <img src="https://en.gravatar.com/userimage/23206348/9d3694eac224757ca3636779f4f3b79e.jpg?size=400" />
             </div>
           </div>
         </div>
