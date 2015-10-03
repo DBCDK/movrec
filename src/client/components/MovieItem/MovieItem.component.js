@@ -30,7 +30,11 @@ class MovieItem extends React.Component {
           rightHandler(elem, pid);
         }
       });
-      hammertime.get('swipe').set({direction: Hammer.DIRECTION_HORIZONTAL});
+      hammertime.get('swipe').set({
+        direction: Hammer.DIRECTION_HORIZONTAL,
+        threshold: 8,
+        velocity: 0.4
+      });
     }
   }
 
