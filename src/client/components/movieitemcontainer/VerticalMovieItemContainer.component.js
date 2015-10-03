@@ -13,10 +13,6 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     this.self = this;
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   shouldComponentUpdate(nextProps) {
     return (JSON.stringify(this.props) !== JSON.stringify(nextProps));
   }
