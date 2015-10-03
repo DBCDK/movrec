@@ -1,10 +1,34 @@
 'use strict';
 
 import React from 'react';
+import {debounce} from 'lodash';
 
 class MovieItem extends React.Component {
   constructor() {
     super();
+  }
+
+  componentDidMount() {
+    const leftHandler = this.props.leftHandler ? debounce(this.props.leftHandler, 150) : this.props.leftHandler;
+    const rightHandler = this.props.rightHandler ? debounce(this.props.rightHandler, 150) : this.props.rightHandler;
+
+    if (leftHandler && rightHandler) {
+      var hammertime = new Hammer(React.findDOMNode(this.refs.movieItem), {});
+      hammertime.on('pan', function(ev) {
+        let elem = ev.target;
+        while(elem.className !== 'movieitem') {
+          elem = elem.parentElement;
+        }
+
+        if (ev.direction === Hammer.DIRECTION_LEFT) {
+          leftHandler(elem);
+        }
+        else if (ev.direction === Hammer.DIRECTION_RIGHT) {
+          rightHandler(elem);
+        }
+      });
+      hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+    }
   }
 
   render() {
@@ -13,7 +37,7 @@ class MovieItem extends React.Component {
     const creator = this.props.creator || 'Creator';
 
     return (
-      <div className="movieitem" >
+      <div className="movieitem" ref='movieItem'>
         <div className="movieitem--image-container" >
           <img className="movieitem--image-container--image" src={imageUrl} />
         </div>
@@ -29,7 +53,9 @@ MovieItem.displayName = 'MovieItem';
 MovieItem.propTypes = {
   title: React.PropTypes.string,
   creator: React.PropTypes.string,
-  imageUrl: React.PropTypes.string
+  imageUrl: React.PropTypes.string,
+  leftHandler: React.PropTypes.func,
+  rightHandler: React.PropTypes.func
 };
 
 export default MovieItem;

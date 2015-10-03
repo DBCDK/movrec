@@ -14,7 +14,7 @@ body {
 }
 
 .movie-item-container--container {
-    height: 50%;
+    height: 63%;
     overflow: scroll;
 }
 
@@ -40,4 +40,8 @@ body {
 
 .horizontal-movie-item-container > li > .movieitem {
     height: 80%;
+}
+
+.movieitem--image-container--image {
+    width: 190px;
 }

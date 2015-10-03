@@ -13,12 +13,18 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     this.self = this;
   }
 
-  componentDidMount() {
-    // this.refs.movieItemContainer.addEventListener("scroll", this.onPageScroll);
-  }
-
   shouldComponentUpdate(nextProps) {
     return (JSON.stringify(this.props) !== JSON.stringify(nextProps));
+  }
+
+  leftHandler(elem) {
+    let leftcol = document.getElementsByClassName('vertical-movie-item-container container-number-1')[0];
+    leftcol.insertBefore(elem, leftcol.firstChild);
+  }
+
+  rightHandler(elem) {
+    let rightcol = document.getElementsByClassName('vertical-movie-item-container container-number-3')[0];
+    rightcol.insertBefore(elem, rightcol.firstChild);
   }
 
   getMovieItems(movies) {
@@ -28,7 +34,7 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
       movieItems.push((
         <div className='row' key={key}>
           <div className='' >
-            <MovieItem title={val.title} imageUrl={val.imageUrl} />
+            <MovieItem title={val.title} imageUrl={val.imageUrl} leftHandler={this.leftHandler} rightHandler={this.rightHandler} />
           </div>
         </div>
       ));
@@ -37,13 +43,9 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     return movieItems;
   }
 
-  onPageScroll() {
-    console.log('scroll');
-  }
-
   render() {
     return (
-      <div className='vertical-movie-item-container' ref='movieItemContainer' >
+      <div className={'vertical-movie-item-container container-number-' + this.props.position} ref='movieItemContainer'>
         {this.getMovieItems(this.props.movies)}
       </div>
     );

@@ -13,6 +13,7 @@ class MovieItemContainerComponent extends React.Component {
   }
 
   componentWillMount() {
+    console.log(this.props.movies);
     this.state.movies = isEmpty(this.state.movies) ? this.props.movies : this.state.movies;
   }
 }
@@ -20,8 +21,8 @@ class MovieItemContainerComponent extends React.Component {
 MovieItemContainerComponent.displayName = 'MovieItemContainerComponent';
 MovieItemContainerComponent.propTypes = {
   isAutoScrolling: PropTypes.bool,
-  movies: PropTypes.object,
-  movieItemCssClasses: PropTypes.string
+  position: PropTypes.number.isRequired,
+  movies: PropTypes.object
 };
 
 export default MovieItemContainerComponent;

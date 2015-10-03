@@ -53,21 +53,21 @@ class FrontPageContainer extends React.Component {
             <div className='large-4 medium-4 columns' >
               <h2>Likes!</h2>
               <div className='movie-item-container--container' >
-                <VerticalMovieItemContainerComponent movies={movies} width={1} />
+                <VerticalMovieItemContainerComponent movies={movies} position={1} />
               </div>
             </div>
 
             <div className='large-4 medium-4 columns' >
               <h2>MovieRec!</h2>
-              <div className='movie-item-container--container' >
-                <VerticalMovieItemContainerComponent movies={randomRecommendations} isAutoScrolling={true} width={1} />
+              <div className='movie-item-container--container'>
+                <VerticalMovieItemContainerComponent movies={randomRecommendations} isAutoScrolling={true} position={2} />
               </div>
             </div>
 
             <div className='large-4 medium-4 columns' >
               <h2>Dislikes!</h2>
               <div className='movie-item-container--container' >
-                <VerticalMovieItemContainerComponent movies={movies} width={1} />
+                <VerticalMovieItemContainerComponent movies={movies} position={3} />
               </div>
             </div>
           </div>
@@ -81,9 +81,9 @@ class FrontPageContainer extends React.Component {
         </div>
 
         <div className='show-for-medium-up pull-to-bottom' >
-          <div className='row' >
-            <h2 className='text-center' >Vi anbefaler</h2>
-            <HorizontalMovieItemContainerComponent movies={movies} movieItemCssClasses={'large-2 medium-2'} />
+          <div className='row'>
+            <h2 className='text-center'>Vi anbefaler</h2>
+            <HorizontalMovieItemContainerComponent movies={movies} movieItemCssClasses={'large-2 medium-2'} position= {4} />
           </div>
         </div>
       </div>
