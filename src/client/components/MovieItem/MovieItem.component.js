@@ -20,9 +20,6 @@ class MovieItem extends React.Component {
         <div className="movieitem--title-container" >
           <span className="movieitem--title-container--title" >{title}</span>
         </div>
-        <div className="movieitem--creator-container" >
-          <span className="movieitem--creator-container--creator" >{creator}</span>
-        </div>
       </div>
     );
   }
