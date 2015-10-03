@@ -1,0 +1,15 @@
+.horizontal-movie-item-container {
+  overflow-x: scroll;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.horizontal-movie-item-container > li {
+  display: inline-block;
+  list-style-type: none;
+  padding-right: 20px;
+}
+
+.horizontal-movie-item-container > li > .movieitem {
+  height: 80%;
+}

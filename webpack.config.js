@@ -12,7 +12,7 @@ module.exports = [{
   name: 'browser',
   entry: {
     frontpage: './src/client/components/frontpage/index.js',
-    /*styles: process.env.NODE_APPLICATION === 'ddbmobil' && './src/client/styles/ddb.scss' || './src/client/styles/pg.scss'*/ // eslint-disable-line no-process-env
+    styles: './src/client/sass/main.scss'
   },
   output: {
     path: path.join(__dirname, 'public/js'),
