@@ -42,9 +42,19 @@ class FrontPageContainer extends React.Component {
     return (random || recommendations);
   }
 
+  likeFunction(pid) {
+    console.log('liek', pid);
+  }
+
+  dislikeFunction(pid) {
+    console.log('disliek', pid);
+  }
+
   render() {
     const randomRecommendations = this.state.random;
     const movies = {};
+    let likedMovies = [];
+    let dislikedMovies = [];
 
     return (
       <div className='container' >
@@ -53,21 +63,34 @@ class FrontPageContainer extends React.Component {
             <div className='large-4 medium-4 columns' >
               <h2>Likes!</h2>
               <div className='movie-item-container--container' >
-                <VerticalMovieItemContainerComponent movies={movies} position={1} />
+                <VerticalMovieItemContainerComponent
+                  movies={likedMovies}
+                  position={1}
+                  addToLikes={this.likeFunction}
+                  addToDislikes={this.dislikeFunction} />
               </div>
             </div>
 
             <div className='large-4 medium-4 columns' >
               <h2>MovieRec!</h2>
               <div className='movie-item-container--container'>
-                <VerticalMovieItemContainerComponent movies={randomRecommendations} isAutoScrolling={true} position={2} />
+                <VerticalMovieItemContainerComponent
+                  movies={randomRecommendations}
+                  isAutoScrolling={true}
+                  position={2}
+                  addToLikes={this.likeFunction}
+                  addToDislikes={this.dislikeFunction} />
               </div>
             </div>
 
             <div className='large-4 medium-4 columns' >
               <h2>Dislikes!</h2>
               <div className='movie-item-container--container' >
-                <VerticalMovieItemContainerComponent movies={movies} position={3} />
+                <VerticalMovieItemContainerComponent
+                  movies={dislikedMovies}
+                  position={3}
+                  addToLikes={this.likeFunction}
+                  addToDislikes={this.dislikeFunction} />
               </div>
             </div>
           </div>
@@ -83,7 +106,9 @@ class FrontPageContainer extends React.Component {
         <div className='show-for-medium-up pull-to-bottom' >
           <div className='row'>
             <h2 className='text-center'>Vi anbefaler</h2>
-            <HorizontalMovieItemContainerComponent movies={movies} movieItemCssClasses={'large-2 medium-2'} position= {4} />
+            <HorizontalMovieItemContainerComponent
+              movies={movies}
+              position= {4} />
           </div>
         </div>
       </div>

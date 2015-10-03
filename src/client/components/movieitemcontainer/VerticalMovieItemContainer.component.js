@@ -13,18 +13,30 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     this.self = this;
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   shouldComponentUpdate(nextProps) {
     return (JSON.stringify(this.props) !== JSON.stringify(nextProps));
   }
 
-  leftHandler(elem) {
-    let leftcol = document.getElementsByClassName('vertical-movie-item-container container-number-1')[0];
-    leftcol.insertBefore(elem, leftcol.firstChild);
+  leftHandler() {
+    let like = this.props.addToLikes;
+    return (elem, pid) => {
+      let leftcol = document.getElementsByClassName('vertical-movie-item-container container-number-1')[0];
+      leftcol.insertBefore(elem, leftcol.firstChild);
+      like(pid);
+    }
   }
 
-  rightHandler(elem) {
-    let rightcol = document.getElementsByClassName('vertical-movie-item-container container-number-3')[0];
-    rightcol.insertBefore(elem, rightcol.firstChild);
+  rightHandler() {
+    let dislike = this.props.addToDislikes;
+    return (elem, pid) => {
+      let rightcol = document.getElementsByClassName('vertical-movie-item-container container-number-3')[0];
+      rightcol.insertBefore(elem, rightcol.firstChild);
+      dislike(pid);
+    }
   }
 
   getMovieItems(movies) {
@@ -34,7 +46,7 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
       movieItems.push((
         <div className='row' key={key}>
           <div className='' >
-            <MovieItem title={val.title} imageUrl={val.imageUrl} leftHandler={this.leftHandler} rightHandler={this.rightHandler} />
+            <MovieItem title={val.title} imageUrl={val.imageUrl} pid={val.pid} leftHandler={this.leftHandler()} rightHandler={this.rightHandler()} />
           </div>
         </div>
       ));

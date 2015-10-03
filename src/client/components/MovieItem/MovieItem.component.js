@@ -9,11 +9,14 @@ class MovieItem extends React.Component {
   }
 
   componentDidMount() {
+    let ref = this.refs.movieItem;
+    let pid = this.props.pid;
+
     const leftHandler = this.props.leftHandler ? debounce(this.props.leftHandler, 150) : this.props.leftHandler;
     const rightHandler = this.props.rightHandler ? debounce(this.props.rightHandler, 150) : this.props.rightHandler;
 
     if (leftHandler && rightHandler) {
-      var hammertime = new Hammer(React.findDOMNode(this.refs.movieItem), {});
+      var hammertime = new Hammer(React.findDOMNode(ref), {});
       hammertime.on('pan', function(ev) {
         let elem = ev.target;
         while(elem.className !== 'movieitem') {
@@ -21,10 +24,10 @@ class MovieItem extends React.Component {
         }
 
         if (ev.direction === Hammer.DIRECTION_LEFT) {
-          leftHandler(elem);
+          leftHandler(elem, pid);
         }
         else if (ev.direction === Hammer.DIRECTION_RIGHT) {
-          rightHandler(elem);
+          rightHandler(elem, pid);
         }
       });
       hammertime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
@@ -54,6 +57,7 @@ MovieItem.propTypes = {
   title: React.PropTypes.string,
   creator: React.PropTypes.string,
   imageUrl: React.PropTypes.string,
+  pid: React.PropTypes.string,
   leftHandler: React.PropTypes.func,
   rightHandler: React.PropTypes.func
 };
