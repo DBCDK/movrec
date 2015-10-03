@@ -15,11 +15,11 @@ class HorizontalMovieItemContainerComponent extends MovieItemContainerComponent 
 
     each(movies, (val, key) => {
       movieItems.push((
-        <div className='row' key={key}>
-          <div className='' >
+        <li key={key}>
+          <a href={val.url} target="_blank">
             <MovieItem title={val.title} imageUrl={val.imageUrl} pid={val.pid} />
-          </div>
-        </div>
+          </a>
+        </li>
       ));
     });
 

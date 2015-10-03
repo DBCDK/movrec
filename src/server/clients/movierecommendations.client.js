@@ -36,7 +36,9 @@ function getRandomMovieRecommendations(params) {
     request.post(
       {
         url: url,
-        json: {}
+        json: {
+          N: params
+        }
       }, (err, httpResponse) => {
         if (err){
           console.error(`Some error occured while communicating with the recommender service at: ${url}`, err);

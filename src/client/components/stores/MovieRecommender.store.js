@@ -14,7 +14,7 @@ const MovieRecommenderStore = Reflux.createStore({
 
   init() {
     this.listenToMany(MovieRecommenderActions);
-    MovieRecommenderActions.randomMovieRecommendationsRequest();
+    MovieRecommenderActions.randomMovieRecommendationsRequest(50);
   },
 
   onMovieRecommendationsResponse(response) {

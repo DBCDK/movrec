@@ -105,7 +105,7 @@ class FrontPageContainer extends React.Component {
         <div className='row' >
           <div className='show-for-medium-up' >
             <div className='large-4 medium-4 columns' >
-              <h2>Fin film</h2>
+              <h3 className='text-center'>Fin film</h3>
               <div className='movie-item-container--container' >
                 <VerticalMovieItemContainerComponent
                   movies={likes}
@@ -116,7 +116,7 @@ class FrontPageContainer extends React.Component {
             </div>
 
             <div className='large-4 medium-4 columns' >
-              <h2>Forslag</h2>
+              <h3 className='text-center'>Forslag</h3>
               <div className='movie-item-container--container'>
                 <VerticalMovieItemContainerComponent
                   movies={randomRecommendations}
@@ -128,7 +128,7 @@ class FrontPageContainer extends React.Component {
             </div>
 
             <div className='large-4 medium-4 columns' >
-              <h2>Ikke så fin film</h2>
+              <h3 className='text-center'>Ikke så fin film</h3>
               <div className='movie-item-container--container' >
                 <VerticalMovieItemContainerComponent
                   movies={dislikes}
@@ -150,7 +150,7 @@ class FrontPageContainer extends React.Component {
 
         <div className='show-for-medium-up pull-to-bottom' >
           <div className='row'>
-            <h2 className='text-center'>Anbefalinger</h2>
+            <h3 className='text-center'>Anbefalinger</h3>
             <HorizontalMovieItemContainerComponent
               movies={recommendations}
               position= {4} />
