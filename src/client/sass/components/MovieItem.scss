@@ -8,10 +8,10 @@
   height: 200px;
 }
 .movie-item-container--container {
-  height: 63%;
+  height: 60%;
   overflow: scroll;
   background-color: #FBFBFB;
-  padding: 10px;
+  padding: 5px;
   border: solid 1px #E8E6E6;
 }
 
@@ -23,5 +23,7 @@
 }
 
 li > a > .movieitem {
+  height: 95%;
+  max-height: 95%;
   background-image: none;
 }
