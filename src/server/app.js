@@ -16,7 +16,7 @@ const socket = socketio.listen(server);
 const ENV = app.get('env');
 const RecommenderConfig = {
   recommend: {
-    endpoint: 'http://xp-p01.dbc.dk:8014/'
+    endpoint: 'http://xp-p01.dbc.dk:8014/' || process.env.RECOMMENDER_URL
   }
 };
 
