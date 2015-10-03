@@ -25,14 +25,13 @@ app.set('port', process.env.PORT || 8012); // eslint-disable-line no-process-env
 const provider = ServiceProvider({services: RecommenderConfig});
 provider.registerServiceClient(MovieRecommenderClient);
 provider.registerTransform(MovieRecommenderTransform);
-provider.bootstrap();
+provider.setupSockets(socket);
 
-/* kept for reference
+// kept for reference
 let promise = provider.trigger('getMovieRecommendations');
 Promise.all(promise).then((result) => {
   console.log('result', JSON.stringify(result));
 });
-*/
 
 // Configure templating
 app.set('views', path.join(__dirname, './templates'));
