@@ -3,7 +3,7 @@
 [![David](https://img.shields.io/david/DBCDK/movrec.svg?style=flat-square)](https://david-dm.org/DBCDK/movrec#info=dependencies)
 [![David](https://img.shields.io/david/dev/DBCDK/movrec.svg?style=flat-square)](https://david-dm.org/DBCDK/movrec#info=devDependencies)
 
-Movie Recommender made during [![HACK4DK]](http://hack4.dk) 2015
+Movie Recommender made during [HACK4DK](http://hack4.dk) 2015
 
 ## Description
 
