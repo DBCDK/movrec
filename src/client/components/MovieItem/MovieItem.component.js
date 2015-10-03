@@ -17,7 +17,7 @@ class MovieItem extends React.Component {
 
     if (leftHandler && rightHandler) {
       var hammertime = new Hammer(React.findDOMNode(ref), {});
-      hammertime.on('pan', function(ev) {
+      hammertime.on('swipe', function(ev) {
         let elem = ev.target;
         while (elem.className !== 'movieitem') {
           elem = elem.parentElement;
@@ -31,7 +31,7 @@ class MovieItem extends React.Component {
         }
       });
 
-      hammertime.get('pan').set({
+      hammertime.get('swipe').set({
         direction: Hammer.DIRECTION_HORIZONTAL,
         threshold: 8,
         velocity: 0.4
