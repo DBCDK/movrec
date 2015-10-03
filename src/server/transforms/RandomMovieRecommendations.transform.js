@@ -2,7 +2,7 @@
 
 const MovieRecommendationsTransform = {
   event() {
-    return 'getMovieRecommendations';
+    return 'getRandomMovieRecommendations';
   },
 
   requestTransform(event, params) {
@@ -10,7 +10,6 @@ const MovieRecommendationsTransform = {
   },
 
   responseTransform(data) {
-    console.log(arguments);
     return data;
   }
 };

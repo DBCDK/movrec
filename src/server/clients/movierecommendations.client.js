@@ -18,7 +18,25 @@ function getMovieRecommendations(params) {
         json: {}
       }, (err, httpResponse) => {
         if (err){
-          console.error('Some error occured while communicating with the recommender service', err);
+          console.error(`Some error occured while communicating with the recommender service at: ${url}`, err);
+        } else {
+          resolve(httpResponse.body);
+        }
+      }
+    );
+  });
+}
+
+function getRandomMovieRecommendations(params) {
+  return new Promise((resolve) => {
+    const url = endpoint + 'random';
+    request.post(
+      {
+        url: url,
+        json: {}
+      }, (err, httpResponse) => {
+        if (err){
+          console.error(`Some error occured while communicating with the recommender service at: ${url}`, err);
         } else {
           resolve(httpResponse.body);
         }
@@ -48,4 +66,5 @@ export const name = 'recommend';
 
 export const METHODS = {
   getMovieRecommendations: getMovieRecommendations,
+  getRandomMovieRecommendations: getRandomMovieRecommendations
 };
