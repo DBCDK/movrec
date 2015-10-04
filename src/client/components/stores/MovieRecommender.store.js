@@ -1,7 +1,7 @@
 'use strict';
 
 import Reflux from 'reflux';
-import {each} from 'lodash';
+import {each, extend} from 'lodash';
 
 // Actions
 import MovieRecommenderActions from '../actions/MovieRecommender.action';
@@ -49,7 +49,7 @@ const MovieRecommenderStore = Reflux.createStore({
   },
 
   parseResponse(response, target, removeExisting) {
-    const result = removeExisting ? {} : this.store[target];
+    let result = removeExisting ? {} : extend({}, this.store[target]);
     response.result.forEach((movie) => {
       const pid = movie[0];
       const data = movie[1];

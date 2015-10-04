@@ -95,10 +95,10 @@ class FrontPageContainer extends React.Component {
   }
 
   render() {
-    const randomRecommendations = this.state.random;
-    const recommendations = this.state.recommendations;
-    const likes = this.state.likes;
-    const dislikes = this.state.dislikes;
+    let randomRecommendations = this.state.random;
+    let recommendations = this.state.recommendations;
+    let likes = this.state.likes;
+    let dislikes = this.state.dislikes;
 
     return (
       <div className='container' >

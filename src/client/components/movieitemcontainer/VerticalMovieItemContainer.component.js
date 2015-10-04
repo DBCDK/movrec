@@ -6,6 +6,8 @@ import {each} from 'lodash';
 import MovieItemContainerComponent from './MovieItemContainer.component.js';
 import MovieItem from '../MovieItem/MovieItem.component.js';
 
+import MovieRecommenderActions from '../actions/MovieRecommender.action';
+
 class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
   constructor() {
     super();
@@ -75,10 +77,27 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     return movieItems;
   }
 
+  loadMoreHandler() {
+    MovieRecommenderActions.randomMovieRecommendationsRequest(25);
+  }
+
   render() {
+    let loadMore = '';
+    if (this.props.isAutoScrolling) {
+      loadMore = (
+        <div>
+          <a className='button expand' onClick={this.loadMoreHandler}>
+            Load Flere film!
+          </a>
+        </div>
+      );
+    }
+
     return (
       <div className={'vertical-movie-item-container container-number-' + this.props.position} ref='movieItemContainer'>
         {this.getMovieItems(this.props.movies)}
+        <br />
+        {loadMore}
       </div>
     );
   }
