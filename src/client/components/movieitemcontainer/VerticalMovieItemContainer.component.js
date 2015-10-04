@@ -53,7 +53,7 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
       'z-index': 1000
     });
     element.hide();
-    temp.animate({'top': newOffset.top, 'left': newOffset.left}, 'fast', function(){
+    temp.animate({'top': newOffset.top, 'left': newOffset.left}, 300, function(){
       element.show();
       temp.remove();
     });
