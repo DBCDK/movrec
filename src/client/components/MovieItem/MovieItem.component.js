@@ -16,24 +16,22 @@ class MovieItem extends React.Component {
     const rightHandler = this.props.rightHandler ? debounce(this.props.rightHandler, 150) : this.props.rightHandler;
 
     if (leftHandler && rightHandler) {
-      var hammertime = new Hammer(React.findDOMNode(ref), {});
+      var hammertime = new Hammer(React.findDOMNode(ref), {
+        direction: Hammer.DIRECTION_HORIZONTAL,
+        threshold: 20
+      });
       hammertime.on('pan', function(ev) {
         let elem = ev.target;
         while (elem.className !== 'movieitem') {
           elem = elem.parentElement;
         }
 
-        if (ev.direction === Hammer.DIRECTION_LEFT) {
+        if (ev.angle > -70 && ev.direction === Hammer.DIRECTION_LEFT) {
           leftHandler(elem, pid);
         }
-        else if (ev.direction === Hammer.DIRECTION_RIGHT) {
+        else if (ev.angle > -70 && ev.direction === Hammer.DIRECTION_RIGHT) {
           rightHandler(elem, pid);
         }
-      });
-
-      hammertime.get('pan').set({
-        direction: Hammer.DIRECTION_HORIZONTAL,
-        threshold: 20
       });
     }
   }
