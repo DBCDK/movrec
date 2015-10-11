@@ -40,7 +40,7 @@ class MovieItem extends React.Component {
     const connectDragSource = this.props.connectDragSource;
 
     return connectDragSource(
-      <div className="movieitem" style={{ opacity: isDragging ? 0.5 : 1 }}>
+      <div className="movieitem" style={{ opacity: isDragging ? 0.8 : 1 }}>
         <div className="movieitem--image-container" >
           <img className="movieitem--image-container--image" src={imageUrl} />
         </div>
