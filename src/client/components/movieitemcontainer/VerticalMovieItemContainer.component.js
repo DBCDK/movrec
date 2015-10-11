@@ -10,6 +10,10 @@ import MovieItem from '../MovieItem/MovieItem.component.js';
 import MovieRecommenderActions from '../actions/MovieRecommender.action';
 
 const moviItemDropTarget = {
+  canDrop(props, monitor) {
+    return props.should !== 'cancel';
+  },
+
   drop(props, monitor, component){
     const should = component.props.should;
     const pid = monitor.getItem().pid;
@@ -22,6 +26,7 @@ const moviItemDropTarget = {
         component.props.addToDislikes(pid);
         break
       default:
+        return false;
         break;
     }
 
@@ -85,8 +90,11 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
       );
     }
 
+    let classNames = 'vertical-movie-item-container container-number-' + this.props.position;
+    classNames += this.props.isOver && this.props.canDrop ? ' is-over' : '';
+
     return connectDropTarget(
-      <div className={'vertical-movie-item-container container-number-' + this.props.position} >
+      <div className={classNames} >
         {this.getMovieItems(this.props.movies)}
         <br />
         {loadMore}
