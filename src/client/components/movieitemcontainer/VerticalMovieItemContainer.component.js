@@ -10,12 +10,6 @@ import MovieItem from '../MovieItem/MovieItem.component.js';
 import MovieRecommenderActions from '../actions/MovieRecommender.action';
 
 const moviItemDropTarget = {
-  canDrop(props, monitor) {
-    console.log('canDrop props: ', props);
-    console.log('canDrop monitor: ', monitor);
-    return true;
-  },
-
   drop(props, monitor, component){
     const should = component.props.should;
     const pid = monitor.getItem().pid;
