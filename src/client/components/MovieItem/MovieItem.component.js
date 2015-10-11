@@ -24,6 +24,7 @@ const cardSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   };
 }
@@ -37,16 +38,19 @@ class MovieItem extends React.Component {
     const imageUrl = this.props.imageUrl || 'http://dummyimage.com/190x150/000/fff.png';
     const title = this.props.title || 'Title';
     const isDragging = this.props.isDragging;
+    const connectDragPreview = this.props.connectDragPreview;
     const connectDragSource = this.props.connectDragSource;
 
-    return connectDragSource(
+    return connectDragPreview(
       <div className="movieitem" style={{ opacity: isDragging ? 0.8 : 1 }}>
-        <div className="movieitem--image-container" >
-          <img className="movieitem--image-container--image" src={imageUrl} />
-        </div>
-        <div className="movieitem--title-container" >
+          <div className="movieitem--image-container" >
+            {connectDragSource(
+            <img className="movieitem--image-container--image" src={imageUrl} />
+            )}
+          </div>
+          <div className="movieitem--title-container" >
           <span className="movieitem--title-container--title" >{title}</span>
-        </div>
+          </div>
       </div>
     );
   }
@@ -60,7 +64,8 @@ MovieItem.propTypes = {
   pid: React.PropTypes.string,
   // Injected by React DnD
   isDragging: React.PropTypes.bool.isRequired,
-  connectDragSource: React.PropTypes.func.isRequired
+  connectDragSource: React.PropTypes.func.isRequired,
+  connectDragPreview: React.PropTypes.func.isRequired
 };
 
 export default DragSource('MovieItem', cardSource, collect)(MovieItem);
