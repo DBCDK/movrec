@@ -1,47 +1,46 @@
 'use strict';
 
 import React from 'react';
+import {DragSource} from 'react-dnd';
 import {debounce} from 'lodash';
+
+
+/**
+ * Implements the drag source contract.
+ */
+const cardSource = {
+  beginDrag(props) {
+    return {
+      imageUrl: props.imageUrl,
+      title: props.title,
+      pid: props.pid
+    };
+  }
+};
+
+/**
+ * Specifies the props to inject into your component.
+ */
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
 
 class MovieItem extends React.Component {
   constructor() {
     super();
   }
 
-  componentDidMount() {
-    let ref = this.refs.movieItem;
-    let pid = this.props.pid;
-
-    const leftHandler = this.props.leftHandler ? debounce(this.props.leftHandler, 150) : this.props.leftHandler;
-    const rightHandler = this.props.rightHandler ? debounce(this.props.rightHandler, 150) : this.props.rightHandler;
-
-    if (leftHandler && rightHandler) {
-      var hammertime = new Hammer(React.findDOMNode(ref), {
-        direction: Hammer.DIRECTION_HORIZONTAL,
-        threshold: 20
-      });
-      hammertime.on('pan', function(ev) {
-        let elem = ev.target;
-        while (elem.className !== 'movieitem') {
-          elem = elem.parentElement;
-        }
-
-        if (ev.angle > -70 && ev.direction === Hammer.DIRECTION_LEFT) {
-          leftHandler(elem, pid);
-        }
-        else if (ev.angle > -70 && ev.direction === Hammer.DIRECTION_RIGHT) {
-          rightHandler(elem, pid);
-        }
-      });
-    }
-  }
-
   render() {
     const imageUrl = this.props.imageUrl || 'http://dummyimage.com/190x150/000/fff.png';
     const title = this.props.title || 'Title';
+    const isDragging = this.props.isDragging;
+    const connectDragSource = this.props.connectDragSource;
 
-    return (
-      <div className="movieitem" ref='movieItem' >
+    return connectDragSource(
+      <div className="movieitem" style={{ opacity: isDragging ? 0.5 : 1 }}>
         <div className="movieitem--image-container" >
           <img className="movieitem--image-container--image" src={imageUrl} />
         </div>
@@ -59,8 +58,9 @@ MovieItem.propTypes = {
   creator: React.PropTypes.string,
   imageUrl: React.PropTypes.string,
   pid: React.PropTypes.string,
-  leftHandler: React.PropTypes.func,
-  rightHandler: React.PropTypes.func
+  // Injected by React DnD
+  isDragging: React.PropTypes.bool.isRequired,
+  connectDragSource: React.PropTypes.func.isRequired
 };
 
-export default MovieItem;
+export default DragSource('MovieItem', cardSource, collect)(MovieItem);
