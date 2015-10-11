@@ -20,13 +20,13 @@ head
         link(rel='stylesheet', href='/styles/style.css')
 
     block scripts
+        script(src='/js/drag-drop-shim.js', type='text/javascript' defer=true)
         if production
             script(src='//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js', type='text/javascript' defer=true)
         else
             script(src='//fb.me/react-0.13.3.js', type='text/javascript' defer=true)
 
         script(src='//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js', type='text/javascript' defer=true)
-        script(src="/js/hammer.min.js", type='text/javascript' defer=true)
         script(src='//code.jquery.com/jquery-1.11.3.min.js', type='text/javascript' defer=true)
         script(src='/js/common.js', type='text/javascript' defer=true)
         script(src='/js/frontpage.js', type='text/javascript' defer=true)
