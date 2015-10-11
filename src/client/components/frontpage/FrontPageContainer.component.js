@@ -3,6 +3,9 @@
 import React from 'react';
 import {indexOf} from 'lodash';
 
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd/modules/backends/HTML5';
+
 // Stores
 import MovieRecommenderStore from '../stores/MovieRecommender.store';
 
@@ -94,6 +97,29 @@ class FrontPageContainer extends React.Component {
     };
   }
 
+  cancelLikeOrDislike() {
+    let likes = this.state.likes;
+    let dislikes = this.state.dislikes;
+    let random = this.state.random;
+    let recommendations = this.state.recommendations;
+
+    return (pid) => {
+      if (likes[pid]) {
+        delete likes[pid];
+      }
+      if (random[pid]) {
+        dislikes[pid] = random[pid];
+        delete random[pid];
+      }
+      if (recommendations[pid]) {
+        dislikes[pid] = recommendations[pid];
+        delete recommendations[pid];
+      }
+
+      MovieRecommenderActions.dislikeMovie(dislikes, likes);
+    };
+  }
+
   render() {
     let randomRecommendations = this.state.random;
     let recommendations = this.state.recommendations;
@@ -110,6 +136,7 @@ class FrontPageContainer extends React.Component {
                 <VerticalMovieItemContainerComponent
                   movies={likes}
                   position={1}
+                  should={'like'}
                   addToLikes={this.likeFunction()}
                   addToDislikes={this.dislikeFunction()} />
               </div>
@@ -122,6 +149,7 @@ class FrontPageContainer extends React.Component {
                   movies={randomRecommendations}
                   isAutoScrolling={true}
                   position={2}
+                  should={'cancel'}
                   addToLikes={this.likeFunction()}
                   addToDislikes={this.dislikeFunction()} />
               </div>
@@ -133,6 +161,7 @@ class FrontPageContainer extends React.Component {
                 <VerticalMovieItemContainerComponent
                   movies={dislikes}
                   position={3}
+                  should={'dislike'}
                   addToLikes={this.likeFunction()}
                   addToDislikes={this.dislikeFunction()} />
               </div>
@@ -161,4 +190,4 @@ class FrontPageContainer extends React.Component {
   }
 }
 
-export default FrontPageContainer;
+export default DragDropContext(HTML5Backend)(FrontPageContainer);
