@@ -2,11 +2,50 @@
 
 import React from 'react';
 import {each} from 'lodash';
+import {DropTarget} from 'react-dnd';
 
 import MovieItemContainerComponent from './MovieItemContainer.component.js';
 import MovieItem from '../MovieItem/MovieItem.component.js';
 
 import MovieRecommenderActions from '../actions/MovieRecommender.action';
+
+const moviItemDropTarget = {
+  canDrop(props, monitor) {
+    console.log('canDrop props: ', props);
+    console.log('canDrop monitor: ', monitor);
+    return true;
+  },
+
+  drop(props, monitor, component){
+    const should = component.props.should;
+    const pid = monitor.getItem().pid;
+
+    switch (should) {
+      case 'like':
+        component.props.addToLikes(pid);
+        break;
+      case 'dislike':
+        component.props.addToDislikes(pid);
+        break
+      default:
+        break;
+    }
+
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDropTarget: connect.dropTarget(),
+    // You can ask the monitor about the current drag state:
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({shallow: true}),
+    canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType()
+  };
+}
 
 class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
   constructor() {
@@ -19,56 +58,14 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     return (JSON.stringify(this.props) !== JSON.stringify(nextProps));
   }
 
-  leftHandler() {
-    let like = this.props.addToLikes;
-    let moveAnimate = this.moveAnimate;
-    return (elem, pid) => {
-      let leftcol = document.getElementsByClassName('vertical-movie-item-container container-number-1')[0];
-      moveAnimate(elem, leftcol);
-      like(pid);
-    }
-  }
-
-  rightHandler() {
-    let dislike = this.props.addToDislikes;
-    let moveAnimate = this.moveAnimate;
-    return (elem, pid) => {
-      let rightcol = document.getElementsByClassName('vertical-movie-item-container container-number-3')[0];
-      moveAnimate(elem, rightcol);
-      dislike(pid);
-    }
-  }
-
-  moveAnimate(element, newParent){
-    element = $(element);
-    newParent= $(newParent);
-
-    var oldOffset = element.offset();
-    element.appendTo(newParent);
-    var newOffset = element.offset();
-
-    var temp = element.clone().appendTo('body');
-    temp.css({
-      'position': 'absolute',
-      'left': oldOffset.left,
-      'top': oldOffset.top,
-      'z-index': 1000
-    });
-    element.hide();
-    temp.animate({'top': newOffset.top, 'left': newOffset.left}, 300, function(){
-      element.show();
-      temp.remove();
-    });
-  }
-
   getMovieItems(movies) {
     let movieItems = [];
 
     each(movies, (val, key) => {
       movieItems.push((
-        <div className='row' key={key}>
+        <div className='row' key={key} >
           <div className='' >
-            <MovieItem title={val.title} imageUrl={val.imageUrl} pid={val.pid} leftHandler={this.leftHandler()} rightHandler={this.rightHandler()} />
+            <MovieItem title={val.title} imageUrl={val.imageUrl} pid={val.pid} />
           </div>
         </div>
       ));
@@ -77,24 +74,25 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
     return movieItems;
   }
 
-  loadMoreHandler() {
+  static loadMoreHandler() {
     MovieRecommenderActions.randomMovieRecommendationsRequest(25);
   }
 
   render() {
+    const connectDropTarget = this.props.connectDropTarget;
     let loadMore = '';
     if (this.props.isAutoScrolling) {
       loadMore = (
         <div>
-          <a className='button expand' onClick={this.loadMoreHandler}>
+          <a className='button expand' onClick={this.loadMoreHandler} >
             Load Flere film!
           </a>
         </div>
       );
     }
 
-    return (
-      <div className={'vertical-movie-item-container container-number-' + this.props.position} ref='movieItemContainer'>
+    return connectDropTarget(
+      <div className={'vertical-movie-item-container container-number-' + this.props.position} >
         {this.getMovieItems(this.props.movies)}
         <br />
         {loadMore}
@@ -103,4 +101,6 @@ class VerticalMovieItemContainerComponent extends MovieItemContainerComponent {
   }
 }
 
-export default VerticalMovieItemContainerComponent;
+VerticalMovieItemContainerComponent.displayName = 'VerticalMovieItemContainerComponent';
+
+export default DropTarget('MovieItem', moviItemDropTarget, collect)(VerticalMovieItemContainerComponent);
