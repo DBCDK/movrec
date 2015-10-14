@@ -21,7 +21,7 @@ const ENV = app.get('env');
 const logger = new Logger({app_name: 'movrec'});
 const RecommenderConfig = {
   recommend: {
-    endpoint: 'http://xp-p01.dbc.dk:8014/' || process.env.RECOMMENDER_URL
+    endpoint: 'http://xp-p02.dbc.dk:8014/' || process.env.RECOMMENDER_URL
   }
 };
 
